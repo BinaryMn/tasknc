@@ -188,6 +188,7 @@ void configure(void) /* {{{ */
 	FILE *cmd;
 	char *filepath, *xdg_config_home, *home;
 	int ret = 0;
+	printf("break 1");
 
 	/* set default settings */
 	cfg.nc_timeout = NCURSES_WAIT;                          /* time getch will wait */
@@ -200,6 +201,7 @@ void configure(void) /* {{{ */
 	cfg.formats.title = strdup(" $program_name ($selected_line/$task_count) $> $date");
 	cfg.formats.task = strdup(" $project $description $> ?$due?$due?$-6priority?");
 	cfg.formats.view = strdup(" task info");
+	tnc_fprintf(stdout, LOG_DEBUG, "break 2");
 
 	/* set initial filter */
 	if (!active_filter)
@@ -590,8 +592,8 @@ void ncurses_init() /* {{{ */
 
 	/* initialize screen */
 	tnc_fprintf(stdout, LOG_DEBUG, "starting ncurses...");
-	stdscr = initscr();
-	if (stdscr == NULL )
+	void* stdscrn = initscr();
+	if (stdscrn == NULL )
 	{
 	    fprintf(stderr, "Error initialising ncurses.\n");
 	    exit(EXIT_FAILURE);

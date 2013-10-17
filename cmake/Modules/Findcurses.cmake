@@ -9,12 +9,13 @@
 #  CURSES_HAVE_NCURSES_CURSES_H - true if ncurses/curses.h is available
 #  CURSES_LIBRARY - set for backwards compatibility with 2.4 CMake
 #
-# Set CURSES_NEED_NCURSES to TRUE before the FIND_PACKAGE() command if NCurses 
+# Set CURSES_NEED_NCURSES to TRUE before the FIND_PACKAGE() command if NCurses
 # functionality is required.
 
 # Set CURSES_NEED_WIDE to TRUE before the FIND_PACKAGE() command if unicode
-# functionality is required
+# functionality is requireu
 
+SET(CURSES_NEED_WIDE TRUE)
 SET(CURSES_LIBRARY_NAME "curses")
 SET(NCURSES_LIBRARY_NAME "ncurses")
 IF(CURSES_NEED_WIDE)
@@ -85,18 +86,18 @@ ELSE(NOT CURSES_USE_NCURSES)
   FIND_FILE(CURSES_HAVE_NCURSES_NCURSES_H ncurses/ncurses.h)
   FIND_FILE(CURSES_HAVE_NCURSES_CURSES_H  ncurses/curses.h)
   FIND_FILE(CURSES_HAVE_CURSES_H          curses.h 
-    HINTS "${_cursesParentDir}/include")
+    HINTS "${_cursesParentDir}/include/ncursesw")
 
   FIND_FILE(CURSES_HAVE_NCURSESW_H         ncursesw.h)
   FIND_FILE(CURSES_HAVE_NCURSESW_NCURSES_H ncursesw/ncurses.h)
   FIND_FILE(CURSES_HAVE_NCURSESW_CURSES_H  ncursesw/curses.h)
   FIND_FILE(CURSES_HAVE_CURSESW_H          cursesw.h 
-    HINTS "${_cursesParentDir}/include")
+    HINTS "${_cursesParentDir}/include/ncursesw")
 
   FIND_PATH(CURSES_NCURSES_INCLUDE_PATH ncurses.h ncurses/ncurses.h 
     ncurses/curses.h ncursesw.h ncursesw/ncurses.h ncursesw/curses.h cursesw.h)
   FIND_PATH(CURSES_NCURSES_INCLUDE_PATH curses.h
-    HINTS "${_cursesParentDir}/include")
+    HINTS "${_cursesParentDir}/include/ncursesw")
 
   # for compatibility with older FindCurses.cmake this has to be in the cache
   # FORCE must not be used since this would break builds which preload
